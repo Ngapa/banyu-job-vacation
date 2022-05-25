@@ -7,12 +7,12 @@ from account.models import User
 
 GENDER_CHOICES = (('male', 'Male'), ('female', 'Female'))
 
-class EmployeeRegisrationsForm(forms.Form):
+class EmployeeRegistrationForm(forms.Form):
     first_name = forms.CharField(required=True)
     last_name = forms.CharField(required=True)
     
     def __init__(self, *args, **kwargs):
-        super(EmployeeRegisrationsForm, self).__init__(*args, **kwargs)
+        super(EmployeeRegistrationForm, self).__init__(*args, **kwargs)
         self.fields["gender"].required = True
         self.fields["first_name"].label = "First Name"
         self.fields["last_name"].label = "Last Name"
@@ -46,12 +46,12 @@ class EmployeeRegisrationsForm(forms.Form):
             user.save()
         return user
     
-class EmployerRegisrationForm(forms.Form):
+class EmployerRegistrationForm(forms.Form):
     first_name = forms.CharField(required=True)
     last_name = forms.CharField(required=True)
     
     def __init__(self, *args, **kwargs):
-        super(EmployerRegisrationForm, self).__init__(*args, **kwargs)
+        super(EmployerRegistrationForm, self).__init__(*args, **kwargs)
         self.fields["first_name"].label = "Company Name"
         self.fields["last_name"].label = "Company Address"
         self.fields["password1"].label = "Password"
@@ -72,7 +72,7 @@ class EmployerRegisrationForm(forms.Form):
         }
         
     def save(self, commit=True):
-        user = super(EmployerRegisrationForm, self).save(commit=False)
+        user = super(EmployerRegistrationForm, self).save(commit=False)
         user.role = 'employer'
         if commit:
             user.save()

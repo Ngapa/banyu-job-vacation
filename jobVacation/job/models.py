@@ -1,6 +1,6 @@
 from django.urls import reverse
 from django.db import models
-from time import timezone
+from django.utils import timezone
 
 from account.models import User
 from tags.models import Tag
@@ -64,9 +64,9 @@ class Applicant(models.Model):
     
     
 class Favorite(models.Model):
-    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     job = models.ForeignKey('Job', on_delete=models.CASCADE, related_name='favorites')
-    created_at = models.DatetimeField(default=timezone.now)
+    created_at = models.DateTimeField(default=timezone.now)
     status = models.BooleanField(default=False)
     
     def __str__ (self):
