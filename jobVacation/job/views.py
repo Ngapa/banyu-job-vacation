@@ -19,7 +19,7 @@ from jobVacation.tags.models import Tag
 
 class HomeView(ListView):
     model = Job
-    template_name = "job/home.html"
+    template_name = "home.html"
     context_object_name = 'jobs'
 
     def get_queryset(self):
@@ -34,7 +34,7 @@ class HomeView(ListView):
 
 class SearchView(ListView):
     model = Job
-    template_name = "job/jobs.html"
+    template_name = "job/search.html"
     context_object_name = 'jobs'
 
     def get_queryset(self):
