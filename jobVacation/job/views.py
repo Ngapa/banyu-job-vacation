@@ -292,7 +292,7 @@ class JobUpdateView(UpdateView):
         return self.form_invalid(form)
 
 
-class ApplicantView(ListView):
+class ApplicantListView(ListView):
     model = Applicant
     template_name = "job/employer_applicant_list.html"
     context_object_name = 'applicants'
