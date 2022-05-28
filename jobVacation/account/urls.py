@@ -2,7 +2,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import include, path
 
-from job.views import EditProfileView, EmployerProfileEditView
+from job.views import EditProfileView, EmployerProfileUpdateView
 
 from .views import *
 
@@ -15,7 +15,7 @@ urlpatterns = [
          name="employer-register"),
     path("employee/profile/update/", EditProfileView.as_view(),
          name="employee-profile-update"),
-    path("employer/profile/update/", EmployerProfileEditView.as_view(),
+    path("employer/profile/update/", EmployerProfileUpdateView.as_view(),
          name="employer-profile-update"),
     path("logout/", LogoutView.as_view(), name="logout"),
     path("login/", LoginView.as_view(), name="login"),

@@ -1,0 +1,27 @@
+{
+  "name": "banyu",
+  "version": "1.0.0",
+  "description": "job provider webapp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ngapa/banyu-job-vacation.git"
+  },
+  "keywords": [
+    "job", "django", "vacation"
+  ],
+  "author": "maarut",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ngapa/banyu-job-vacation/issues"
+  },
+  "homepage": "https://github.com/Ngapa/banyu-job-vacation#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.7",
+    "postcss": "^8.4.14",
+    "tailwindcss": "^3.0.24"
+  }
+}

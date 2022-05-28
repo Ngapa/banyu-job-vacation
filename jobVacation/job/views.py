@@ -9,12 +9,12 @@ from django.utils.decorators import method_decorator
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
 from job.models import Job
-from jobVacation.job.decorators import user_is_employee, user_is_employer
-from jobVacation.job.forms import ApplyJobForm, CreateJobForm
-from jobVacation.job.models import Applicant, Favorite
-from jobVacation.account.models import User
-from jobVacation.account.forms import EmployeeUpdateProfileForm, EmployerUpdateProfileForm
-from jobVacation.tags.models import Tag
+from job.decorators import user_is_employee, user_is_employer
+from job.forms import ApplyJobForm, CreateJobForm
+from job.models import Applicant, Favorite
+from account.models import User
+from account.forms import EmployeeUpdateProfileForm, EmployerUpdateProfileForm
+from tags.models import Tag
 
 
 class HomeView(ListView):
@@ -23,7 +23,7 @@ class HomeView(ListView):
     context_object_name = 'jobs'
 
     def get_queryset(self):
-        return self.model.objects.undefilled()[:5]
+        return self.model.objects.unfilled()[:5]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -178,8 +178,8 @@ class EditProfileView(UpdateView):
         return obj
 
 
-@method_decorator(login_required(login_url=reverse_lazy('account:login')))
-@method_decorator(user_is_employee)
+@method_decorator(login_required(login_url=reverse_lazy('account:login')), name='dispatch')
+@method_decorator(user_is_employee, name='dispatch')
 class FavoriteListView(ListView):
     model = Favorite
     template_name = 'job/employee_favorite_list.html'
@@ -257,8 +257,8 @@ class JobCreateView(CreateView):
         return self.form_invalid(form)
 
 
-@method_decorator(login_required(login_url=reverse_lazy('account:login')))
-@method_decorator(user_is_employer)
+@method_decorator(login_required(login_url=reverse_lazy('account:login')), name='dispatch')
+@method_decorator(user_is_employer, name='dispatch')
 class JobUpdateView(UpdateView):
     form_class = CreateJobForm
     template_name = "job/employer_update_job.html"
@@ -323,8 +323,8 @@ def filled(request, job_id=None):
     return HttpResponseRedirect(reverse_lazy('job:employer-dashboard'))
 
 
-@method_decorator(login_required(login_url=reverse_lazy('account:login')))
-@method_decorator(user_is_employer)
+@method_decorator(login_required(login_url=reverse_lazy('account:login')), name='dispatch')
+@method_decorator(user_is_employer, name='dispatch')
 class AppliedApplicantView(DetailView):
     model = Applicant
     template_name = "job/employer_applicant_detail.html"
@@ -343,8 +343,8 @@ class AppliedApplicantView(DetailView):
         return context
 
 
-@method_decorator(login_required(login_url=reverse_lazy('account:login')))
-@method_decorator(user_is_employer)
+@method_decorator(login_required(login_url=reverse_lazy('account:login')), name='dispatch')
+@method_decorator(user_is_employer, name='dispatch')
 class SendResponseView(UpdateView):
     model = Applicant
     http_method_names = ['post']
